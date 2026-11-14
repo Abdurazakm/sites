@@ -1,3 +1,4 @@
+import { setupScrollReveals } from "./scroll-reveal.mjs";
 import { clinic } from "./clinic.mjs";
 import { content } from "./content.mjs";
 import { uiCopy } from "./ui-copy.mjs";
@@ -131,3 +132,5 @@ if (form) {
     location.assign(`/${lang}/confirmation/`);
   });
 }
+
+setupScrollReveals();

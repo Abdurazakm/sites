@@ -16,7 +16,7 @@ await fs.mkdir(path.join(dist, "assets"), { recursive: true });
 const cssPath = path.join(root, "src/styles.css");
 const css = await postcss([tailwind({ base: root, optimize: true })]).process(
   await fs.readFile(cssPath, "utf8"),
-  { from: cssPath }
+  { from: cssPath },
 );
 await fs.writeFile(path.join(dist, "assets/styles.css"), css.css);
 const brand = `:root{--color-primary:${clinic.theme.primary};--color-ink:${clinic.theme.ink};--color-paper:${clinic.theme.paper};}`;
@@ -30,8 +30,12 @@ for (const name of [
   "flow-copy.mjs",
   "clinic.mjs",
   "validation.mjs",
+  "scroll-reveal.mjs",
 ])
-  await fs.copyFile(path.join(root, "src", name), path.join(dist, "assets", name));
+  await fs.copyFile(
+    path.join(root, "src", name),
+    path.join(dist, "assets", name),
+  );
 for (const lang of ["en", "am"]) {
   for (const route of routes) {
     const folder = path.join(dist, href(lang, route));
@@ -45,10 +49,12 @@ await fs.writeFile(
   path.join(dist, "robots.txt"),
   clinic.demo
     ? "User-agent: *\nDisallow: /\n"
-    : `User-agent: *\nAllow: /\nSitemap: ${clinic.domain}/sitemap.xml\n`
+    : `User-agent: *\nAllow: /\nSitemap: ${clinic.domain}/sitemap.xml\n`,
 );
 await fs.writeFile(
   path.join(dist, "sitemap.xml"),
-  `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${["en", "am"].flatMap((lang) => routes.filter((route) => route !== "confirmation").map((route) => `<url><loc>${clinic.domain}${href(lang, route)}</loc></url>`)).join("")}</urlset>`
+  `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${["en", "am"].flatMap((lang) => routes.filter((route) => route !== "confirmation").map((route) => `<url><loc>${clinic.domain}${href(lang, route)}</loc></url>`)).join("")}</urlset>`,
 );
-process.stdout.write(`Built ${routes.length * 2 + 1} bilingual static pages.\n`);
+process.stdout.write(
+  `Built ${routes.length * 2 + 1} bilingual static pages.\n`,
+);
