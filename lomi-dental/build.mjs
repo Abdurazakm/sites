@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import postcss from "postcss";
@@ -18,6 +19,11 @@ const css = await postcss([tailwind({ base: root, optimize: true })]).process(
   await fs.readFile(cssPath, "utf8"),
   { from: cssPath },
 );
+const hash = createHash("sha256").update(css.css);
+for (const name of (await fs.readdir(path.join(root, "src"))).filter((name) => /\.(mjs|css)$/.test(name)).sort()) {
+  hash.update(await fs.readFile(path.join(root, "src", name)));
+}
+const assetVersion = hash.digest("hex").slice(0, 12);
 await fs.writeFile(path.join(dist, "assets/styles.css"), css.css);
 const brand = `:root:not(.dark){--color-primary:${clinic.theme.primary};--color-ink:${clinic.theme.ink};--color-paper:${clinic.theme.paper};}`;
 await fs.appendFile(path.join(dist, "assets/styles.css"), brand);
@@ -33,19 +39,22 @@ for (const name of [
   "scroll-reveal.mjs",
   "theme.mjs",
 ])
-  await fs.copyFile(
-    path.join(root, "src", name),
+  await fs.writeFile(
     path.join(dist, "assets", name),
+    (await fs.readFile(path.join(root, "src", name), "utf8")).replace(
+      /from "(\.\/[^"?]+\.mjs)"/g,
+      `from "$1?v=${assetVersion}"`,
+    ),
   );
 for (const lang of ["en", "am"]) {
   for (const route of routes) {
     const folder = path.join(dist, href(lang, route));
     await fs.mkdir(folder, { recursive: true });
-    await fs.writeFile(path.join(folder, "index.html"), render(lang, route));
+    await fs.writeFile(path.join(folder, "index.html"), render(lang, route, assetVersion));
   }
 }
-await fs.writeFile(path.join(dist, "index.html"), render("en", "home"));
-await fs.writeFile(path.join(dist, "404.html"), render("en", "contact"));
+await fs.writeFile(path.join(dist, "index.html"), render("en", "home", assetVersion));
+await fs.writeFile(path.join(dist, "404.html"), render("en", "contact", assetVersion));
 await fs.writeFile(
   path.join(dist, "robots.txt"),
   clinic.demo

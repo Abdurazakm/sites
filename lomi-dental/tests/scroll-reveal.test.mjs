@@ -22,6 +22,8 @@ function fixture({ reduced = false, supported = true } = {}) {
   class Element {
     constructor(top = 900) {
       this.top = top;
+      const classes = new Set();
+      this.classList = { add: (name) => classes.add(name), remove: (name) => classes.delete(name), contains: (name) => classes.has(name) };
       this.children = [];
       this.parentElement = null;
       this.inForm = false;
@@ -103,6 +105,9 @@ test("Scroll reveals leave visible content and form controls immediately availab
   assert.ok(!f.observer.observed.has(visible));
   assert.ok(!f.observer.observed.has(form));
   assert.ok(f.observer.observed.has(belowFold));
+  assert.ok(belowFold.classList.contains("reveal-pending"));
+  assert.ok(!visible.classList.contains("reveal-pending"));
+  assert.ok(!form.classList.contains("reveal-pending"));
   assert.equal(f.animations.length, 0);
 });
 
@@ -110,18 +115,20 @@ test("Scroll reveals animate once with a bounded stagger and no persistent trans
   const f = fixture();
   const targets = Array.from({ length: 4 }, () => new f.Element());
   setupScrollReveals(f.root, f.view);
-  const entries = targets.map((target) => ({ target, isIntersecting: true }));
+  const entries = targets.map((target) => ({ target, isIntersecting: true, intersectionRatio: 1 }));
   f.observer.callback(entries);
   f.observer.callback(entries);
   assert.equal(f.animations.length, 4);
   assert.deepEqual(
     f.animations.map((animation) => animation.options.delay),
-    [0, 60, 120, 120],
+    [0, 90, 180, 180],
   );
   assert.ok(
     f.animations.every((animation) => animation.options.fill === "backwards"),
   );
   assert.equal(f.observer.observed.size, 0);
+  assert.ok(targets.every((target) => !target.classList.contains("reveal-pending")));
+  assert.ok(f.animations.every((animation) => animation.options.duration === 650));
 });
 
 test("Scroll reveals respect reduced motion and unsupported-browser fallbacks", () => {
@@ -141,10 +148,10 @@ test("Keyboard focus cancels entrance motion and prevents replay", () => {
   const link = {};
   target.children.push(link);
   setupScrollReveals(f.root, f.view);
-  f.observer.callback([{ target, isIntersecting: true }]);
+  f.observer.callback([{ target, isIntersecting: true, intersectionRatio: 1 }]);
   f.listeners.get("focusin")({ target: link });
   assert.equal(f.animations[0].cancelled, true);
-  f.observer.callback([{ target, isIntersecting: true }]);
+  f.observer.callback([{ target, isIntersecting: true, intersectionRatio: 1 }]);
   assert.equal(f.animations.length, 1);
 });
 
@@ -152,11 +159,22 @@ test("Enabling reduced motion during a reveal cancels motion and disconnects obs
   const f = fixture();
   const target = new f.Element();
   setupScrollReveals(f.root, f.view);
-  f.observer.callback([{ target, isIntersecting: true }]);
+  f.observer.callback([{ target, isIntersecting: true, intersectionRatio: 1 }]);
   f.preference.matches = true;
   f.preferenceListeners.get("change")();
   assert.equal(f.animations[0].cancelled, true);
   assert.equal(f.observer.disconnected, true);
   assert.equal(f.listeners.size, 0);
   assert.equal(f.preferenceListeners.size, 0);
+});
+
+test("Reveals wait until content is inside the viewport and cleanup unhides pending content", () => {
+  const f = fixture();
+  const target = new f.Element();
+  const cleanup = setupScrollReveals(f.root, f.view);
+  f.observer.callback([{target, isIntersecting: true, intersectionRatio: 0.01}]);
+  assert.equal(f.animations.length, 0);
+  assert.ok(target.classList.contains("reveal-pending"));
+  cleanup();
+  assert.ok(!target.classList.contains("reveal-pending"));
 });

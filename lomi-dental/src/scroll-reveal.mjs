@@ -46,19 +46,20 @@ export function setupScrollReveals(root = document, view = window) {
     (entries) => {
       let order = 0;
       for (const entry of entries) {
-        if (!entry.isIntersecting || revealed.has(entry.target)) continue;
+        if (!entry.isIntersecting || entry.intersectionRatio < 0.12 || revealed.has(entry.target)) continue;
+        entry.target.classList.remove("reveal-pending");
         revealed.add(entry.target);
         observer.unobserve(entry.target);
         if (preference.matches || entry.target.contains(root.activeElement))
           continue;
         const animation = entry.target.animate(
           [
-            { opacity: 0, transform: "translateY(16px)" },
+            { opacity: 0, transform: "translateY(28px)" },
             { opacity: 1, transform: "translateY(0)" },
           ],
           {
-            duration: 480,
-            delay: Math.min(order++ * 60, 120),
+            duration: 650,
+            delay: Math.min(order++ * 90, 180),
             easing: "cubic-bezier(0.22, 1, 0.36, 1)",
             fill: "backwards",
           },
@@ -71,18 +72,21 @@ export function setupScrollReveals(root = document, view = window) {
         animation.finished.then(finish, finish);
       }
     },
-    { threshold: 0 },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
   );
 
   for (const target of targets) {
     const bounds = target.getBoundingClientRect();
-    if (bounds.height > 0 && bounds.top >= view.innerHeight)
+    if (bounds.height > 0 && bounds.top >= view.innerHeight) {
       observer.observe(target);
+      target.classList.add("reveal-pending");
+    }
   }
 
   function revealFocused(event) {
     for (const target of targets) {
       if (!target.contains(event.target)) continue;
+      target.classList.remove("reveal-pending");
       revealed.add(target);
       observer.unobserve(target);
       running.get(target)?.cancel();
@@ -92,6 +96,7 @@ export function setupScrollReveals(root = document, view = window) {
 
   function cleanup() {
     observer.disconnect();
+    for (const target of targets) target.classList.remove("reveal-pending");
     for (const animation of running.values()) animation.cancel();
     running.clear();
     root.removeEventListener("focusin", revealFocused);

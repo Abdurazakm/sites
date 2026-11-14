@@ -317,3 +317,16 @@
     transform: none;
   }
 }
+
+@layer components {
+  .reveal-pending {
+    @apply opacity-0 translate-y-7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  .reveal-pending {
+    opacity: 1;
+    translate: none;
+  }
+}

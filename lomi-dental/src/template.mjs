@@ -29,7 +29,8 @@ export const routes = [
 export const href = (lang, route = "home", service) =>
   `/${lang}/${route === "home" ? "" : `${route}/`}${service ? `?service=${encodeURIComponent(service)}` : ""}`;
 
-export function render(lang, route) {
+export function render(lang, route, assetVersion = "") {
+  const assetSuffix = assetVersion ? `?v=${encodeURIComponent(assetVersion)}` : "";
   const f = flowCopy[lang];
   const t = {
     ...content[lang],
@@ -155,5 +156,5 @@ export function render(lang, route) {
     main = `${breadcrumbs()}<section class="wrap pb-16 md:pb-20"><div class="page-intro">${intro(t.privacy, u.privacyTitle)}</div><div class="max-w-3xl space-y-8">${t.privacySections.map(([h, p]) => `<section class="border-t border-line pt-6"><h2 class="text-xl font-semibold">${e(h)}</h2><p class="body-copy mt-3">${e(p)}</p></section>`).join("")}</div></section>`;
   }
   const description = serviceId ? t.serviceContent[serviceId][3] : u.heroText;
-  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${e(title)} — ${name}</title><meta name="description" content="${e(description)}"><meta name="robots" content="${clinic.demo ? "noindex, nofollow" : "index, follow"}"><link rel="canonical" href="${clinic.domain}${link(route)}"><link rel="alternate" hreflang="en" href="${clinic.domain}${href("en", route)}"><link rel="alternate" hreflang="am" href="${clinic.domain}${href("am", route)}"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script id="theme-init">${themeInitScript}</script><link rel="stylesheet" href="/assets/styles.css"><script type="module" src="/assets/app.mjs"></script></head><body data-page="${e(route)}">${header}<main id="main" tabindex="-1">${main}</main>${footer}${callButton}</body></html>`;
+  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${e(title)} — ${name}</title><meta name="description" content="${e(description)}"><meta name="robots" content="${clinic.demo ? "noindex, nofollow" : "index, follow"}"><link rel="canonical" href="${clinic.domain}${link(route)}"><link rel="alternate" hreflang="en" href="${clinic.domain}${href("en", route)}"><link rel="alternate" hreflang="am" href="${clinic.domain}${href("am", route)}"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script id="theme-init">${themeInitScript}</script><link rel="stylesheet" href="/assets/styles.css${assetSuffix}"><script type="module" src="/assets/app.mjs${assetSuffix}"></script></head><body data-page="${e(route)}">${header}<main id="main" tabindex="-1">${main}</main>${footer}${callButton}</body></html>`;
 }
