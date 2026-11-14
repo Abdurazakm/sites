@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { setupScrollReveals } from "../src/scroll-reveal.mjs";
 
-function fixture({ reduced = false, supported = true } = {}) {
+function fixture({ reduced = false, supported = true, width = 1280 } = {}) {
   const listeners = new Map();
   const preferenceListeners = new Map();
   const elements = [];
@@ -58,6 +58,7 @@ function fixture({ reduced = false, supported = true } = {}) {
   }
   const view = {
     innerHeight: 700,
+    innerWidth: width,
     Element,
     matchMedia: () => preference,
     IntersectionObserver: supported
@@ -207,4 +208,24 @@ test("Initially visible content can animate after leaving and returning", () => 
   target.top = 100;
   f.observer.callback([{ target, isIntersecting: true, intersectionRatio: 1 }]);
   assert.equal(f.animations.length, 1);
+});
+
+test("Mobile reveals use shorter motion and a smaller stagger", () => {
+  const f = fixture({ width: 390 });
+  const targets = Array.from({ length: 4 }, () => new f.Element());
+  setupScrollReveals(f.root, f.view);
+  f.observer.callback(targets.map((target) => ({ target, isIntersecting: true, intersectionRatio: 1 })));
+  assert.deepEqual(f.animations.map((animation) => animation.options.delay), [0, 60, 120, 120]);
+  assert.ok(f.animations.every((animation) => animation.options.duration === 520));
+  assert.ok(f.animations.every((animation) => animation.keyframes[0].transform === "translateY(20px)"));
+});
+
+test("Scroll exit uses observer bounds without forcing another layout measurement", () => {
+  const f = fixture();
+  const target = new f.Element();
+  setupScrollReveals(f.root, f.view);
+  f.observer.callback([{ target, isIntersecting: true, intersectionRatio: 1 }]);
+  target.getBoundingClientRect = () => { throw new Error("Unexpected layout read"); };
+  f.observer.callback([{ target, isIntersecting: false, intersectionRatio: 0, boundingClientRect: { top: -250, height: 200 } }]);
+  assert.ok(target.classList.contains("reveal-pending"));
 });

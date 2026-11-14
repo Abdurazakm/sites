@@ -43,6 +43,11 @@ export function setupScrollReveals(root = document, view = window) {
     (element) =>
       !candidates.some((other) => other !== element && element.contains(other)),
   );
+  const mobile = view.innerWidth < 768;
+  const distance = mobile ? 20 : 28;
+  const duration = mobile ? 520 : 650;
+  const stagger = mobile ? 60 : 90;
+  const maxDelay = mobile ? 120 : 180;
   const running = new Map();
   const revealed = new Set();
   const observer = new view.IntersectionObserver(
@@ -50,7 +55,7 @@ export function setupScrollReveals(root = document, view = window) {
       let order = 0;
       for (const entry of entries) {
         if (!entry.isIntersecting) {
-          const bounds = entry.target.getBoundingClientRect();
+          const bounds = entry.boundingClientRect ?? entry.target.getBoundingClientRect();
           const outside = bounds.top >= view.innerHeight || bounds.top + bounds.height <= 0;
           if (outside && !entry.target.contains(root.activeElement)) {
             revealed.delete(entry.target);
@@ -67,12 +72,12 @@ export function setupScrollReveals(root = document, view = window) {
           continue;
         const animation = entry.target.animate(
           [
-            { opacity: 0, transform: "translateY(28px)" },
+            { opacity: 0, transform: `translateY(${distance}px)` },
             { opacity: 1, transform: "translateY(0)" },
           ],
           {
-            duration: 650,
-            delay: Math.min(order++ * 90, 180),
+            duration,
+            delay: Math.min(order++ * stagger, maxDelay),
             easing: "cubic-bezier(0.22, 1, 0.36, 1)",
             fill: "backwards",
           },

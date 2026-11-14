@@ -47,3 +47,5 @@ Illustrative photos from Unsplash: `photo-1629909613654-28e377c37b09`, `photo-16
 Hero entrances are rendered in both languages with `data-hero-copy` and `data-hero-image`. CSS fades and raises the text first, followed by the first page image. They respect reduced motion, remain visible without JavaScript, and are excluded from duplicate scroll reveals.
 
 Same-origin page and language navigation uses native CSS cross-document view transitions with a 140 ms opacity crossfade. It adds no JavaScript, navigation delays, or dependencies. Reduced-motion visitors and unsupported browsers keep ordinary navigation. Hero entrances and scroll reveals remain independent.
+
+Mobile scroll reveals use 520 ms / 20 px motion with at most 120 ms stagger; desktop retains 650 ms / 28 px with at most 180 ms stagger. A shared IntersectionObserver handles visibility, with browser-provided entry bounds on exit and only opacity/transform animations. No scroll listener, animation loop, or animation dependency is added.
