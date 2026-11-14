@@ -1,3 +1,4 @@
+import { applyTheme } from "./theme.mjs";
 import { setupScrollReveals } from "./scroll-reveal.mjs";
 import { clinic } from "./clinic.mjs";
 import { content } from "./content.mjs";
@@ -28,7 +29,7 @@ document.addEventListener("keydown", (event) => {
 window.matchMedia("(min-width: 1280px)").addEventListener("change", closeMenu);
 const themeButton = document.querySelector("#theme");
 function updateThemeButton() {
-  const dark = document.body.classList.contains("dark");
+  const dark = document.documentElement.classList.contains("dark");
   themeButton?.setAttribute("aria-pressed", String(dark));
   themeButton?.setAttribute("aria-label", dark ? u.themeLight : u.themeDark);
   themeButton?.setAttribute("title", dark ? u.themeLight : u.themeDark);
@@ -38,23 +39,20 @@ function updateThemeButton() {
   sun?.toggleAttribute("hidden", !dark);
 }
 themeButton?.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
+  applyTheme(
+    document.documentElement,
+    !document.documentElement.classList.contains("dark"),
+  );
   updateThemeButton();
   try {
     localStorage.setItem(
       "lomi-theme",
-      document.body.classList.contains("dark") ? "dark" : "light",
+      document.documentElement.classList.contains("dark") ? "dark" : "light",
     );
   } catch {
     return;
   }
 });
-try {
-  if (localStorage.getItem("lomi-theme") === "dark")
-    document.body.classList.add("dark");
-} catch {
-  document.body.classList.remove("dark");
-}
 updateThemeButton();
 const form = document.querySelector("#appointment-form");
 if (form) {

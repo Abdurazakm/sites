@@ -23,12 +23,14 @@
 
 @layer base {
   html {
-    @apply scroll-smooth scroll-pt-28;
+    @apply scroll-smooth scroll-pt-28 bg-paper;
+    color-scheme: light;
   }
   body {
     @apply m-0 bg-paper pb-[calc(5rem+env(safe-area-inset-bottom))] font-sans text-ink antialiased md:pb-0;
   }
-  body.dark {
+  html.dark {
+    color-scheme: dark;
     --color-primary: oklch(0.8 0.09 220);
     --color-on-primary: oklch(0.2 0.035 220);
     --color-paper: oklch(0.19 0.015 155);

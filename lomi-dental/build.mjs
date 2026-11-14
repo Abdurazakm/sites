@@ -19,7 +19,7 @@ const css = await postcss([tailwind({ base: root, optimize: true })]).process(
   { from: cssPath },
 );
 await fs.writeFile(path.join(dist, "assets/styles.css"), css.css);
-const brand = `:root{--color-primary:${clinic.theme.primary};--color-ink:${clinic.theme.ink};--color-paper:${clinic.theme.paper};}`;
+const brand = `:root:not(.dark){--color-primary:${clinic.theme.primary};--color-ink:${clinic.theme.ink};--color-paper:${clinic.theme.paper};}`;
 await fs.appendFile(path.join(dist, "assets/styles.css"), brand);
 await fs.cp(path.join(root, "public"), dist, { recursive: true });
 for (const name of [
@@ -31,6 +31,7 @@ for (const name of [
   "clinic.mjs",
   "validation.mjs",
   "scroll-reveal.mjs",
+  "theme.mjs",
 ])
   await fs.copyFile(
     path.join(root, "src", name),
