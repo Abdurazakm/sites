@@ -3,6 +3,9 @@ const revealTargets = [
   "main .section-heading",
   "main .signature-hero",
   "main .treatment-card",
+  "main .treatment-row",
+  "main section[id] > h2",
+  "main section[id] > p",
   "main figure",
   "main article",
   "main aside",
@@ -46,10 +49,20 @@ export function setupScrollReveals(root = document, view = window) {
     (entries) => {
       let order = 0;
       for (const entry of entries) {
-        if (!entry.isIntersecting || entry.intersectionRatio < 0.12 || revealed.has(entry.target)) continue;
+        if (!entry.isIntersecting) {
+          const bounds = entry.target.getBoundingClientRect();
+          const outside = bounds.top >= view.innerHeight || bounds.top + bounds.height <= 0;
+          if (outside && !entry.target.contains(root.activeElement)) {
+            revealed.delete(entry.target);
+            running.get(entry.target)?.cancel();
+            running.delete(entry.target);
+            entry.target.classList.add("reveal-pending");
+          }
+          continue;
+        }
+        if (entry.intersectionRatio < 0.12 || revealed.has(entry.target)) continue;
         entry.target.classList.remove("reveal-pending");
         revealed.add(entry.target);
-        observer.unobserve(entry.target);
         if (preference.matches || entry.target.contains(root.activeElement))
           continue;
         const animation = entry.target.animate(
@@ -72,14 +85,17 @@ export function setupScrollReveals(root = document, view = window) {
         animation.finished.then(finish, finish);
       }
     },
-    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+    { threshold: [0, 0.12] },
   );
 
   for (const target of targets) {
     const bounds = target.getBoundingClientRect();
-    if (bounds.height > 0 && bounds.top >= view.innerHeight) {
-      observer.observe(target);
+    if (bounds.height <= 0) continue;
+    observer.observe(target);
+    if (bounds.top >= view.innerHeight || bounds.top + bounds.height <= 0) {
       target.classList.add("reveal-pending");
+    } else {
+      revealed.add(target);
     }
   }
 
@@ -88,7 +104,6 @@ export function setupScrollReveals(root = document, view = window) {
       if (!target.contains(event.target)) continue;
       target.classList.remove("reveal-pending");
       revealed.add(target);
-      observer.unobserve(target);
       running.get(target)?.cancel();
       running.delete(target);
     }

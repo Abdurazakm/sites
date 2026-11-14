@@ -102,7 +102,7 @@ test("Scroll reveals leave visible content and form controls immediately availab
   const form = new f.Element(1000);
   form.inForm = true;
   setupScrollReveals(f.root, f.view);
-  assert.ok(!f.observer.observed.has(visible));
+  assert.ok(f.observer.observed.has(visible));
   assert.ok(!f.observer.observed.has(form));
   assert.ok(f.observer.observed.has(belowFold));
   assert.ok(belowFold.classList.contains("reveal-pending"));
@@ -111,7 +111,7 @@ test("Scroll reveals leave visible content and form controls immediately availab
   assert.equal(f.animations.length, 0);
 });
 
-test("Scroll reveals animate once with a bounded stagger and no persistent transform", () => {
+test("Scroll reveals do not replay while visible and keep a bounded stagger", () => {
   const f = fixture();
   const targets = Array.from({ length: 4 }, () => new f.Element());
   setupScrollReveals(f.root, f.view);
@@ -126,7 +126,7 @@ test("Scroll reveals animate once with a bounded stagger and no persistent trans
   assert.ok(
     f.animations.every((animation) => animation.options.fill === "backwards"),
   );
-  assert.equal(f.observer.observed.size, 0);
+  assert.equal(f.observer.observed.size, 4);
   assert.ok(targets.every((target) => !target.classList.contains("reveal-pending")));
   assert.ok(f.animations.every((animation) => animation.options.duration === 650));
 });
@@ -177,4 +177,34 @@ test("Reveals wait until content is inside the viewport and cleanup unhides pend
   assert.ok(target.classList.contains("reveal-pending"));
   cleanup();
   assert.ok(!target.classList.contains("reveal-pending"));
+});
+
+test("Scroll reveals replay after leaving the screen in either direction", () => {
+  const f = fixture();
+  const target = new f.Element();
+  setupScrollReveals(f.root, f.view);
+  const enter = () => f.observer.callback([{ target, isIntersecting: true, intersectionRatio: 1 }]);
+  enter();
+  for (const top of [-250, 900]) {
+    target.top = top;
+    f.observer.callback([{ target, isIntersecting: false, intersectionRatio: 0 }]);
+    assert.ok(target.classList.contains("reveal-pending"));
+    target.top = 200;
+    enter();
+    assert.ok(!target.classList.contains("reveal-pending"));
+  }
+  assert.equal(f.animations.length, 3);
+});
+
+test("Initially visible content can animate after leaving and returning", () => {
+  const f = fixture();
+  const target = new f.Element(100);
+  setupScrollReveals(f.root, f.view);
+  f.observer.callback([{ target, isIntersecting: true, intersectionRatio: 1 }]);
+  assert.equal(f.animations.length, 0);
+  target.top = -250;
+  f.observer.callback([{ target, isIntersecting: false, intersectionRatio: 0 }]);
+  target.top = 100;
+  f.observer.callback([{ target, isIntersecting: true, intersectionRatio: 1 }]);
+  assert.equal(f.animations.length, 1);
 });

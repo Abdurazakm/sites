@@ -13,7 +13,7 @@ From this directory, run `npm install`, `npm run build`, then `npm run dev`. Ope
 - `src/ui-copy.mjs`: bilingual interface copy, treatment categories, booking guidance, and page headings.
 - `src/presence-copy.mjs`: patient-focused storytelling and accurate bilingual image descriptions.
 - `src/flow-copy.mjs`: treatment groups, page transitions, first-visit guidance, and treatment-page questions in both languages.
-- `src/scroll-reveal.mjs`: shared scroll-reveal selection, 650 ms fade-and-rise motion, and capped 180 ms card staggering. Reveals run once, skip initially visible content and forms, respect reduced motion, and cancel when keyboard focus enters. Unsupported browsers keep static content visible.
+- `src/scroll-reveal.mjs`: shared scroll-reveal selection, 650 ms fade-and-rise motion, and capped 180 ms card staggering. Reveals replay after leaving and re-entering the viewport, skip initial motion for visible content and forms, respect reduced motion, and cancel when keyboard focus enters. Unsupported browsers keep static content visible.
 - `src/styles.css`: shared Tailwind tokens, typography, responsive layout, and dark mode.
 - `src/template.mjs`: shared page layouts. The build generates separate HTML files per language and treatment, with canonical and alternate-language links.
 - `public/assets/`: self-hosted illustrative photographs and fonts. Replace with approved clinic assets.
