@@ -201,3 +201,18 @@ test("Demo has no personal-data persistence or request delivery", async () => {
   assert.match(script, /localStorage\.setItem\(\s*"lomi-theme"/);
   assert.ok(script.includes("form.reset()"));
 });
+
+test("Every locale has one hero text entrance and a single eager hero image where available", () => {
+  for (const lang of ["en", "am"]) {
+    for (const route of routes) {
+      const html = render(lang, route);
+      assert.equal((html.match(/data-hero-copy/g) || []).length, 1, lang + "/" + route);
+      const images = html.match(/<img\b[^>]*>/g) || [];
+      assert.equal(images.filter((image) => image.includes("data-hero-image")).length, images.length ? 1 : 0);
+      if (images.length) {
+        assert.ok(images[0].includes("data-hero-image"));
+        assert.ok(!images[0].includes('loading="lazy"'));
+      }
+    }
+  }
+});

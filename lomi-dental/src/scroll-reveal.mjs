@@ -32,8 +32,8 @@ export function setupScrollReveals(root = document, view = window) {
 
   const candidates = [...root.querySelectorAll(revealTargets)].filter(
     (element) =>
-      !element.closest("form, [hidden]") &&
-      !element.querySelector("form") &&
+      !element.closest("form, [hidden], [data-hero-copy], [data-hero-image]") &&
+      !element.querySelector("form, [data-hero-copy], [data-hero-image]") &&
       !element.parentElement?.closest(".treatment-card, article"),
   );
   const targets = candidates.filter(
