@@ -1,0 +1,101 @@
+{
+  "generator": "Built-in image_gen tool",
+  "purpose": "Illustrative imagery for the fictional Lomi Dental demonstration. Not actual clinic staff, patients, facilities, or treatment results.",
+  "assets": [
+    {
+      "file": "public/assets/presence-hero.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: premium dental clinic website hero photograph, landscape 3:2. Create a refined editorial photograph of a stylish Ethiopian woman aged around 30 with natural curly black hair and medium brown skin, smiling warmly with natural healthy teeth, standing in a beautiful bright modern dental clinic in Addis Ababa. Ivory and muted deep teal surroundings, subtle blurred dental chair in the background. Authentic relaxed expression, natural skin texture, tasteful white blouse, aspirational yet approachable. Subject on right two-thirds, airy composition, warm daylight, premium portrait photography, crisp eyes. No text, no logos, no watermark, no exaggerated unnaturally white teeth. This is illustrative marketing photography for a fictional dental clinic."
+    },
+    {
+      "file": "public/assets/presence-team.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: dental clinic website team photograph, landscape 3:2. Editorial portrait of two Ethiopian dental professionals, a woman around 35 and a man around 40, friendly calm expressions, in clean deep teal dental scrubs with white coats, standing together naturally inside a bright sophisticated dental clinic in Addis Ababa. Recognizable dental setting softly blurred behind them, ivory walls, soft natural daylight, accurate anatomy, realistic hands, no stethoscopes, no tools held. Professional authentic and welcoming rather than stock corporate. No text, logos or watermarks. Illustrative fictional dental team, not real named people."
+    },
+    {
+      "file": "public/assets/presence-consultation.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: premium dental clinic website consultation photograph, landscape 3:2. A caring Ethiopian female dentist in her thirties wearing clean teal scrubs sits beside an Ethiopian female patient in her thirties in a modern dental chair. They have a relaxed face-to-face conversation, both looking engaged, dentist showing a simple small dental model, no procedure underway. Bright ivory and teal premium clinic, natural Addis Ababa daylight through large windows. Human, reassuring, documentary editorial photography, realistic skin and anatomy, polished composition without artificial glamour. No text, brand names, watermark, no stethoscopes. Illustrative scene for fictional clinic."
+    },
+    {
+      "file": "public/assets/presence-implant.jpg",
+      "prompt": "Use case: product-mockup. Asset type: premium dental website treatment photograph, landscape 3:2. Photorealistic dental education still life: a clean anatomical demonstration model of a short section of upper jaw with white teeth and pale pink artificial gums, one titanium implant and a separate white ceramic crown neatly displayed beside it on a pale stone tabletop. Small stainless dental mirror to the side, blurred modern clinic background. Refined high-end clinical product photography, soft daylight, deep teal accent in background, precise realistic objects, reassuring clean not surgical, no blood or human mouth. No text, no labels, no logos or watermarks. Clearly an educational artificial dental model."
+    },
+    {
+      "file": "public/assets/unique-detail-checkup.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: distinct landscape 3:2 photograph for one specific page of a fictional Bole dental clinic website. A gentle routine dental check-up in a premium modern Addis Ababa dental clinic: Ethiopian female dentist in teal scrubs, wearing surgical mask and gloves, using a small dental mirror to examine an Ethiopian adult patient in a dental chair. Side view showing both clinician and patient, calm reassuring natural daylight, not a tight mouth closeup. No invasive procedure, no blood. Premium realistic photography with natural textures, accurate anatomy and professionally plausible dental environment. No logos, watermark, text, collage, multi-panel layout or typography. This is clearly illustrative fictional marketing content, not real patient evidence."
+    },
+    {
+      "file": "public/assets/unique-detail-cleaning.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: distinct landscape 3:2 photograph for one specific page of a fictional Bole dental clinic website. Macro editorial photograph of a professional dental cleaning appointment, Ethiopian adult patient's natural teeth and lips visible at side angle, clinician's blue gloved hands holding a dental mirror and scaler correctly, clean uncluttered bright clinic, pale teal and white palette. Reassuring clinical detail, realistic anatomy and instruments, no blood, no dramatic discoloration, no before/after. Premium realistic photography with natural textures, accurate anatomy and professionally plausible dental environment. No logos, watermark, text, collage, multi-panel layout or typography. This is clearly illustrative fictional marketing content, not real patient evidence."
+    },
+    {
+      "file": "public/assets/unique-detail-restoration.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: distinct landscape 3:2 photograph for one specific page of a fictional Bole dental clinic website. Premium clinical product photograph of restorative dentistry: small white ceramic molar crown beside a clean demonstration tooth model showing a tooth-colored filling on a pale stone tray, dental mirror and sealed composite material syringe in background. Sophisticated soft daylight, ivory and teal clinic background, accurate realistic educational objects, no implant screw, no human mouth, no blood, no brand text. Premium realistic photography with natural textures, accurate anatomy and professionally plausible dental environment. No logos, watermark, text, collage, multi-panel layout or typography. This is clearly illustrative fictional marketing content, not real patient evidence."
+    },
+    {
+      "file": "public/assets/unique-detail-orthodontics.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: distinct landscape 3:2 photograph for one specific page of a fictional Bole dental clinic website. Premium clinical photograph of an artificial dental education model showing neat metal orthodontic brackets and fine archwire on natural white artificial teeth, held carefully in two blue gloved hands. Softly blurred bright dental clinic, pale teal accents, honest realistic educational object with pink artificial gums, editorial side angle. No human mouth, no blood. Premium realistic photography with natural textures, accurate anatomy and professionally plausible dental environment. No logos, watermark, text, collage, multi-panel layout or typography. This is clearly illustrative fictional marketing content, not real patient evidence."
+    },
+    {
+      "file": "public/assets/unique-detail-whitening.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: distinct landscape 3:2 photograph for one specific page of a fictional Bole dental clinic website. Premium dental product still life of two transparent professionally made whitening trays, a small unbranded whitening gel syringe and a white ceramic shade guide laid on a pale teal dental worktop. Beautiful natural side light, clean bright modern clinic background, realistic transparent plastic and tidy composition. No human subject, no before/after comparison, no treatment result promises, no text or logos. Premium realistic photography with natural textures, accurate anatomy and professionally plausible dental environment. No logos, watermark, text, collage, multi-panel layout or typography. This is clearly illustrative fictional marketing content, not real patient evidence."
+    },
+    {
+      "file": "public/assets/unique-detail-implants.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: distinct landscape 3:2 photograph for one specific page of a fictional Bole dental clinic website. Close editorial clinical photo of a female dentist's blue-gloved hands holding a full artificial mandibular dental model and showing a titanium implant with an attached ceramic crown. Model is clearly artificial for patient education, accurate clean objects, bright white and soft teal dental office background, no human mouth, no blood, no graphics or text. Premium realistic photography with natural textures, accurate anatomy and professionally plausible dental environment. No logos, watermark, text, collage, multi-panel layout or typography. This is clearly illustrative fictional marketing content, not real patient evidence."
+    },
+    {
+      "file": "public/assets/unique-team-hana.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: distinct landscape 3:2 photograph for one specific page of a fictional Bole dental clinic website. Environmental professional portrait of a fictional Ethiopian female dentist around 35 named Hana (do not render her name), natural black hair neatly tied back, friendly confident expression, clean white coat over deep teal scrubs, standing alone in a bright refined dental clinic. Waist-up, realistic natural skin, composed gentle smile, subtle dental chair in background, no stethoscope, no tools in hands. Premium realistic photography with natural textures, accurate anatomy and professionally plausible dental environment. No logos, watermark, text, collage, multi-panel layout or typography. This is clearly illustrative fictional marketing content, not real patient evidence."
+    },
+    {
+      "file": "public/assets/unique-team-dawit.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: distinct landscape 3:2 photograph for one specific page of a fictional Bole dental clinic website. Environmental professional portrait of a fictional Ethiopian male dentist around 42 named Dawit (do not render his name), short natural black hair and trimmed facial hair, thoughtful friendly expression, clean deep teal dental scrubs, standing alone beside a bright clinic window. Waist-up, warm realistic skin tones, understated smile, blurred dental cabinet behind, no stethoscope, no tools in hands. Distinct composition from female colleague. Premium realistic photography with natural textures, accurate anatomy and professionally plausible dental environment. No logos, watermark, text, collage, multi-panel layout or typography. This is clearly illustrative fictional marketing content, not real patient evidence."
+    },
+    {
+      "file": "public/assets/unique-about-reception.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: distinct landscape 3:2 photograph for one specific page of a fictional Bole dental clinic website. Architectural editorial photograph of a sophisticated welcoming dental clinic reception in Addis Ababa: pale warm stone reception desk, a pair of comfortable upholstered sage chairs, potted indoor plant, natural wood details and ivory walls, subtle teal dental clinic identity without signage or text. Beautiful generous daylight through tall windows, calm premium atmosphere, no people, realistic proportions, landscape framing. Premium realistic photography with natural textures, accurate anatomy and professionally plausible dental environment. No logos, watermark, text, collage, multi-panel layout or typography. This is clearly illustrative fictional marketing content, not real patient evidence."
+    },
+    {
+      "file": "public/assets/unique-contact-welcome.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: distinct landscape 3:2 photograph for one specific page of a fictional Bole dental clinic website. Editorial photograph inside a modern dental clinic entrance in Addis Ababa: friendly Ethiopian receptionist in smart teal clothing standing at a tidy pale reception counter looking toward the viewer, soft daylight, a small plant and comfortable waiting area behind her. Welcoming professional and approachable, no readable paperwork, no monitors showing patient data, no exterior street or fictional signage. Premium realistic photography with natural textures, accurate anatomy and professionally plausible dental environment. No logos, watermark, text, collage, multi-panel layout or typography. This is clearly illustrative fictional marketing content, not real patient evidence."
+    },
+    {
+      "file": "public/assets/unique-appointment-support.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: distinct landscape 3:2 photograph for one specific page of a fictional Bole dental clinic website. Candid editorial photograph of an Ethiopian female dental reception coordinator sitting at a bright tidy clinic desk and speaking on a telephone while looking at a closed appointment notebook. Relaxed professional expression, smart muted teal clothing, warm natural window light, plant in background, ivory clinic interior. No readable personal data, no computer screen, no text, no white coat or medical instruments. Premium realistic photography with natural textures, accurate anatomy and professionally plausible dental environment. No logos, watermark, text, collage, multi-panel layout or typography. This is clearly illustrative fictional marketing content, not real patient evidence."
+    },
+    {
+      "file": "public/assets/catalog-checkup.jpg",
+      "prompt": "Generate one photorealistic-natural editorial photograph for a fictional dental clinic website treatment directory. Landscape 3:2 composition, distinct authentic contemporary Addis Ababa dental clinic setting, clean warm-white interior with restrained teal details, natural daylight, premium realistic photography, anatomically correct hands and equipment. Scene: An Ethiopian female dentist in teal scrubs discussing an oral health check with a relaxed Ethiopian adult male patient seated upright, mirror and tray in background, no active procedure. Main subject centered with room for cropping. No text, no logos, no watermarks, no collage, no before/after, no claims. This will be labeled illustrative.",
+      "source": "C:\\Users\\Hello\\.codex\\generated_images\\01a1d660-3500-77a1-8c6a-3a896cab269f\\exec-9b77faf7-1c2c-4f4d-aaff-5087a77e71d9.png"
+    },
+    {
+      "file": "public/assets/catalog-cleaning.jpg",
+      "prompt": "Generate one photorealistic-natural editorial photograph for a fictional dental clinic website treatment directory. Landscape 3:2 composition, distinct authentic contemporary Addis Ababa dental clinic setting, clean warm-white interior with restrained teal details, natural daylight, premium realistic photography, anatomically correct hands and equipment. Scene: Close editorial view of a hygienist's gloved hands arranging a dental mirror and professional cleaning instruments on a spotless dental tray beside a modern teal dental chair, no patient or bodily material. Main subject centered with room for cropping. No text, no logos, no watermarks, no collage, no before/after, no claims. This will be labeled illustrative.",
+      "source": "C:\\Users\\Hello\\.codex\\generated_images\\01a1d660-3500-77a1-8c6a-3a896cab269f\\exec-1d8047aa-357a-4cd9-979e-cb4cd54d2d88.png"
+    },
+    {
+      "file": "public/assets/catalog-restoration.jpg",
+      "prompt": "Generate one photorealistic-natural editorial photograph for a fictional dental clinic website treatment directory. Landscape 3:2 composition, distinct authentic contemporary Addis Ababa dental clinic setting, clean warm-white interior with restrained teal details, natural daylight, premium realistic photography, anatomically correct hands and equipment. Scene: An Ethiopian male dentist showing a natural tooth model with a small white filling to an Ethiopian adult woman in a bright consultation room, calm educational conversation, no procedure. Main subject centered with room for cropping. No text, no logos, no watermarks, no collage, no before/after, no claims. This will be labeled illustrative.",
+      "source": "C:\\Users\\Hello\\.codex\\generated_images\\01a1d660-3500-77a1-8c6a-3a896cab269f\\exec-505db433-4b14-46ce-b875-f85b2fc41f32.png"
+    },
+    {
+      "file": "public/assets/catalog-implants.jpg",
+      "prompt": "Generate one photorealistic-natural editorial photograph for a fictional dental clinic website treatment directory. Landscape 3:2 composition, distinct authentic contemporary Addis Ababa dental clinic setting, clean warm-white interior with restrained teal details, natural daylight, premium realistic photography, anatomically correct hands and equipment. Scene: Elegant editorial still life of a dentist's blue-gloved hand holding a realistic demonstration jaw model with one visible dental implant and crown, modern dental surgery softly blurred behind, no text or diagram labels. Main subject centered with room for cropping. No text, no logos, no watermarks, no collage, no before/after, no claims. This will be labeled illustrative.",
+      "source": "C:\\Users\\Hello\\.codex\\generated_images\\01a1d660-3500-77a1-8c6a-3a896cab269f\\exec-3aa6cca2-4847-47c9-bd89-03f649652318.png"
+    },
+    {
+      "file": "public/assets/catalog-whitening.jpg",
+      "prompt": "Generate one photorealistic-natural editorial photograph for a fictional dental clinic website treatment directory. Landscape 3:2 composition, distinct authentic contemporary Addis Ababa dental clinic setting, clean warm-white interior with restrained teal details, natural daylight, premium realistic photography, anatomically correct hands and equipment. Scene: An Ethiopian young adult woman smiling naturally while holding a small handheld mirror during a shade consultation in a bright modern dental room, dentist's gloved hand holding a tooth shade guide nearby, no exaggerated white teeth. Main subject centered with room for cropping. No text, no logos, no watermarks, no collage, no before/after, no claims. This will be labeled illustrative.",
+      "source": "C:\\Users\\Hello\\.codex\\generated_images\\01a1d660-3500-77a1-8c6a-3a896cab269f\\exec-8297c237-9cd1-45b8-8de2-358f327f06d1.png"
+    },
+    {
+      "file": "public/assets/catalog-orthodontics.jpg",
+      "prompt": "Generate one photorealistic-natural editorial photograph for a fictional dental clinic website treatment directory. Landscape 3:2 composition, distinct authentic contemporary Addis Ababa dental clinic setting, clean warm-white interior with restrained teal details, natural daylight, premium realistic photography, anatomically correct hands and equipment. Scene: An Ethiopian female dentist showing clear aligners in a transparent case to an Ethiopian young adult male at a consultation table in a modern bright dental clinic, no procedure. Main subject centered with room for cropping. No text, no logos, no watermarks, no collage, no before/after, no claims. This will be labeled illustrative.",
+      "source": "C:\\Users\\Hello\\.codex\\generated_images\\01a1d660-3500-77a1-8c6a-3a896cab269f\\exec-a5bfccdd-0d89-4328-a9d3-a223f5cf9c57.png"
+    }
+  ],
+  "references": [
+    "https://dribbble.com/shots/27834746-Modern-Dental-Clinic-Website-UI-UX-Landing-Page-Design",
+    "https://dribbble.com/shots/26766740-Modern-Dental-Clinic-Website-Design-Clean-Professional-UI-UX",
+    "https://raw.githubusercontent.com/anthropics/skills/main/skills/frontend-design/SKILL.md"
+  ]
+}
