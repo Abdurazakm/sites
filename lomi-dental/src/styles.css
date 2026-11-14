@@ -26,7 +26,7 @@
     @apply scroll-smooth scroll-pt-28;
   }
   body {
-    @apply m-0 bg-paper font-sans text-ink antialiased;
+    @apply m-0 bg-paper pb-[calc(5rem+env(safe-area-inset-bottom))] font-sans text-ink antialiased md:pb-0;
   }
   body.dark {
     --color-primary: oklch(0.8 0.09 220);
@@ -120,20 +120,53 @@
   .site-header {
     @apply sticky top-0 z-40 border-b border-line bg-paper;
   }
+  .brand-name {
+    @apply block text-lg leading-tight font-semibold tracking-tight sm:text-xl;
+  }
+  .brand-location {
+    @apply mt-1 block text-[11px] font-normal text-muted;
+  }
+  .header-row {
+    @apply flex min-h-16 flex-nowrap items-center justify-between gap-1 px-3 sm:min-h-20 sm:gap-4 sm:px-8 lg:px-12 xl:grid xl:max-w-[1480px] xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] xl:px-8;
+  }
+  .header-brand {
+    @apply flex min-w-0 shrink-0 items-center gap-2 sm:gap-3 xl:justify-self-start;
+  }
+  .header-brand .brand-mark {
+    @apply size-8 shrink-0 rounded-lg text-2xl sm:size-10 sm:rounded-xl sm:text-3xl;
+  }
+  .header-brand .brand-name {
+    @apply whitespace-nowrap text-xs min-[360px]:text-sm sm:text-xl;
+  }
+  .header-brand .brand-location {
+    @apply hidden sm:block;
+  }
+  .site-header .language-button {
+    @apply px-1.5 text-xs sm:px-2.5 sm:text-sm;
+  }
   .nav-link {
-    @apply flex min-h-11 items-center border-b-2 border-transparent py-3 text-sm font-medium text-muted hover:text-ink;
+    @apply inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-lg border border-transparent px-2 py-2.5 text-sm font-semibold text-ink transition-colors duration-150 hover:border-line hover:bg-soft hover:text-primary;
   }
   .nav-link.is-active {
-    @apply border-primary text-primary;
+    @apply border-primary bg-primary text-on-primary shadow-sm hover:border-primary hover:bg-primary/90 hover:text-on-primary;
+  }
+  .header-actions {
+    @apply xl:border-l xl:border-line xl:pl-6;
+  }
+  .header-actions .primary-button {
+    @apply gap-2 px-4;
   }
   .mobile-nav-link {
-    @apply block rounded-lg px-3 py-3.5 text-base font-medium hover:bg-soft;
+    @apply block rounded-lg border border-transparent px-3 py-3.5 text-base font-semibold transition-colors hover:border-line hover:bg-soft hover:text-primary;
   }
   .mobile-nav-link.is-active {
-    @apply bg-soft text-primary;
+    @apply border-primary bg-primary text-on-primary hover:bg-primary/90 hover:text-on-primary;
   }
   .icon-button {
     @apply inline-flex size-11 items-center justify-center rounded-lg border border-line text-lg hover:bg-soft;
+  }
+  #theme [hidden] {
+    @apply hidden;
   }
   .language-button {
     @apply inline-flex min-h-11 items-center rounded-lg px-2.5 text-sm font-medium hover:bg-soft;
@@ -154,22 +187,22 @@
     @apply text-lg font-semibold tracking-tight;
   }
   .floating-call {
-    @apply fixed right-5 bottom-[calc(6rem+env(safe-area-inset-bottom))] z-40 inline-flex size-14 items-center justify-center rounded-full border border-on-primary/15 bg-primary text-on-primary shadow-lg transition-colors hover:bg-primary/90 md:right-7 md:bottom-7;
-  }
-  .floating-call-low {
-    @apply bottom-[calc(1.5rem+env(safe-area-inset-bottom))];
+    @apply fixed right-4 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 inline-flex size-12 items-center justify-center rounded-full border border-on-primary/15 bg-primary text-on-primary shadow-lg transition-colors hover:bg-primary/90 md:right-7 md:bottom-7 md:size-14;
   }
   .mobile-appointment {
     @apply fixed right-0 bottom-0 left-0 z-30 border-t border-line bg-paper px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:hidden;
   }
+  .mobile-appointment.has-call {
+    @apply pr-20;
+  }
   .mobile-appointment .primary-button {
-    @apply w-full;
+    @apply w-full gap-2 px-3;
   }
   .skip-link {
     @apply sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-lg focus:bg-paper focus:p-4;
   }
   #mobile-menu {
-    @apply max-h-[calc(100dvh-6rem)] overflow-y-auto;
+    @apply max-h-[calc(100dvh-10rem)] overflow-y-auto md:max-h-[calc(100dvh-6rem)];
   }
   html[lang="am"] .heading,
   html[lang="am"] .page-title,

@@ -4,7 +4,7 @@ A fictional Bole dental clinic demo with English and Amharic pages and a browser
 
 ## Run
 
-From this directory, run `npm install`, `npm run build`, then `npm run dev`. Open http://127.0.0.1:4310. Inside the parent workspace, existing PostCSS and Tailwind dependencies are reused. For a standalone copy, install this directory’s dependencies first. Run `npm test` for the demo checks.
+From this directory, run `npm install`, `npm run build`, then `npm run dev`. Open http://127.0.0.1:4310. The project now lives at `C:\Users\Hello\Desktop\projects\sites\lomi-dental` and installs its own dependencies. Run `npm test` for the demo checks.
 
 ## Customize
 

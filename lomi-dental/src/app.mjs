@@ -30,18 +30,27 @@ function updateThemeButton() {
   const dark = document.body.classList.contains("dark");
   themeButton?.setAttribute("aria-pressed", String(dark));
   themeButton?.setAttribute("aria-label", dark ? u.themeLight : u.themeDark);
+  themeButton?.setAttribute("title", dark ? u.themeLight : u.themeDark);
+  const moon = themeButton?.querySelector("[data-theme-moon]");
+  const sun = themeButton?.querySelector("[data-theme-sun]");
+  moon?.toggleAttribute("hidden", dark);
+  sun?.toggleAttribute("hidden", !dark);
 }
 themeButton?.addEventListener("click", () => {
   document.body.classList.toggle("dark");
   updateThemeButton();
   try {
-    localStorage.setItem("lomi-theme", document.body.classList.contains("dark") ? "dark" : "light");
+    localStorage.setItem(
+      "lomi-theme",
+      document.body.classList.contains("dark") ? "dark" : "light",
+    );
   } catch {
     return;
   }
 });
 try {
-  if (localStorage.getItem("lomi-theme") === "dark") document.body.classList.add("dark");
+  if (localStorage.getItem("lomi-theme") === "dark")
+    document.body.classList.add("dark");
 } catch {
   document.body.classList.remove("dark");
 }
@@ -53,7 +62,8 @@ if (form) {
   tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
   dateField.min = tomorrow.toISOString().slice(0, 10);
   const preferred = new URLSearchParams(location.search).get("service");
-  if (["unsure", ...clinic.services].includes(preferred)) form.elements.service.value = preferred;
+  if (["unsure", ...clinic.services].includes(preferred))
+    form.elements.service.value = preferred;
   const languageLink = document.querySelector("[data-language-switch]");
   function preserveTreatmentLanguage() {
     if (!languageLink) return;
@@ -72,7 +82,15 @@ if (form) {
   }
   form.addEventListener("input", (event) => {
     if (
-      ["name", "phone", "service", "date", "time", "message", "consent"].includes(event.target.name)
+      [
+        "name",
+        "phone",
+        "service",
+        "date",
+        "time",
+        "message",
+        "consent",
+      ].includes(event.target.name)
     )
       clearFieldError(event.target.name);
   });
@@ -81,11 +99,25 @@ if (form) {
     const data = Object.fromEntries(new FormData(form));
     if (data.website) return;
     const errors = validateRequest(data, clinic.services);
-    for (const field of ["name", "phone", "service", "date", "time", "message", "consent"]) {
-      form.elements[field].setAttribute("aria-invalid", String(Boolean(errors[field])));
-      document.querySelector(`#${field}-error`).textContent = errors[field] ? t[errors[field]] : "";
+    for (const field of [
+      "name",
+      "phone",
+      "service",
+      "date",
+      "time",
+      "message",
+      "consent",
+    ]) {
+      form.elements[field].setAttribute(
+        "aria-invalid",
+        String(Boolean(errors[field])),
+      );
+      document.querySelector(`#${field}-error`).textContent = errors[field]
+        ? t[errors[field]]
+        : "";
     }
-    document.querySelector("#form-error").textContent = Object.keys(errors).length
+    document.querySelector("#form-error").textContent = Object.keys(errors)
+      .length
       ? t.formError
       : "";
     if (Object.keys(errors).length) {

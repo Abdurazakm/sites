@@ -20,21 +20,45 @@ test("Every bilingual route has a heading, locale switch, and clear patient navi
       assert.ok(html.includes(href(lang === "en" ? "am" : "en", route)));
       assert.ok(!html.includes(uiCopy[lang].photoCaption));
       assert.ok(!html.includes(content[lang].credits));
-      if (route === "appointment") assert.ok(html.includes(presenceCopy[lang].formDemo));
+      if (route === "appointment")
+        assert.ok(html.includes(presenceCopy[lang].formDemo));
       assert.ok(html.includes('content="noindex, nofollow"'));
       assert.ok(html.includes(`href="tel:${clinic.phone}"`));
       assert.ok(html.includes(`aria-label="${content[lang].phone}"`));
-      const navigation = html.match(/<nav data-primary-navigation[^>]*>(.*?)<\/nav>/s)?.[1];
+      const themeClasses = html
+        .match(/id="theme" class="([^"]+)"/)?.[1]
+        .split(/\s+/);
+      assert.ok(themeClasses?.includes("icon-button"));
+      assert.ok(!themeClasses.includes("hidden"));
+      assert.ok(html.includes("data-theme-sun"));
+      assert.ok(html.includes("data-theme-moon"));
+      const navigation = html.match(
+        /<nav data-primary-navigation[^>]*>(.*?)<\/nav>/s,
+      )?.[1];
       assert.deepEqual(
         [...navigation.matchAll(/href="([^"]+)"/g)].map((match) => match[1]),
-        ["home", "services", "team", "about", "contact"].map((id) => href(lang, id))
+        ["home", "services", "team", "about", "contact"].map((id) =>
+          href(lang, id),
+        ),
       );
       for (const anchor of html.matchAll(/href="#([^"]+)"/g))
-        assert.ok(html.includes(`id="${anchor[1]}"`), `Missing anchor ${anchor[1]}`);
+        assert.ok(
+          html.includes(`id="${anchor[1]}"`),
+          `Missing anchor ${anchor[1]}`,
+        );
       if (route === "services") {
-        assert.equal((html.match(/class="treatment-card"/g) || []).length, clinic.services.length);
-        assert.equal((html.match(/src="\/assets\/catalog-/g) || []).length, clinic.services.length);
-        assert.equal(html.split(flowCopy[lang].viewTreatment).length - 1, clinic.services.length);
+        assert.equal(
+          (html.match(/class="treatment-card"/g) || []).length,
+          clinic.services.length,
+        );
+        assert.equal(
+          (html.match(/src="\/assets\/catalog-/g) || []).length,
+          clinic.services.length,
+        );
+        assert.equal(
+          html.split(flowCopy[lang].viewTreatment).length - 1,
+          clinic.services.length,
+        );
         for (const group of clinic.serviceGroups)
           assert.ok(html.includes(`data-treatment-group="${group.id}"`));
       }
@@ -42,19 +66,33 @@ test("Every bilingual route has a heading, locale switch, and clear patient navi
         const serviceId = route.split("/")[1];
         assert.ok(html.includes(`?service=${serviceId}`));
         assert.ok(html.includes(`aria-current="page"`));
-        assert.ok(html.includes(`<h1 class="page-title">${treatmentName(lang, serviceId)}</h1>`));
-        const sections = ["who", "process", "questions", "request"].map((id) =>
-          html.indexOf(`id="${id}"`)
+        assert.ok(
+          html.includes(
+            `<h1 class="page-title">${treatmentName(lang, serviceId)}</h1>`,
+          ),
         );
-        assert.ok(sections.every((position, index) => position > (sections[index - 1] ?? -1)));
+        const sections = ["who", "process", "questions", "request"].map((id) =>
+          html.indexOf(`id="${id}"`),
+        );
+        assert.ok(
+          sections.every(
+            (position, index) => position > (sections[index - 1] ?? -1),
+          ),
+        );
       }
-      if (route === "appointment") assert.ok(!html.includes('class="mobile-appointment"'));
+      assert.equal(
+        (html.match(/class="mobile-appointment has-call"/g) || []).length,
+        1,
+      );
+      assert.equal((html.match(/class="floating-call"/g) || []).length, 1);
       for (const image of html.matchAll(/<img src="([^"]+)"/g)) {
-        const bytes = await fs.readFile(new URL(`../public${image[1]}`, import.meta.url));
+        const bytes = await fs.readFile(
+          new URL(`../public${image[1]}`, import.meta.url),
+        );
         const fingerprint = createHash("sha256").update(bytes).digest("hex");
         assert.ok(
           !imageOwners[lang].has(fingerprint),
-          `${image[1]} repeats a photo used on ${imageOwners[lang].get(fingerprint)} in ${lang}`
+          `${image[1]} repeats a photo used on ${imageOwners[lang].get(fingerprint)} in ${lang}`,
         );
         imageOwners[lang].set(fingerprint, route);
       }
@@ -71,7 +109,7 @@ test("English and Amharic have matching translation and treatment keys", () => {
       .flatMap(([key, item]) =>
         typeof item === "object" && item !== null
           ? keys(item).map((child) => `${key}.${child}`)
-          : [key]
+          : [key],
       )
       .sort();
   }
@@ -80,7 +118,8 @@ test("English and Amharic have matching translation and treatment keys", () => {
   assert.deepEqual(keys(presenceCopy.en), keys(presenceCopy.am));
   assert.deepEqual(keys(flowCopy.en), keys(flowCopy.am));
   for (const lang of ["en", "am"])
-    for (const id of clinic.services) assert.equal(content[lang].serviceContent[id].length, 5);
+    for (const id of clinic.services)
+      assert.equal(content[lang].serviceContent[id].length, 5);
 });
 
 function treatmentName(lang, serviceId) {
@@ -97,7 +136,12 @@ const valid = {
   message: "",
 };
 test("Valid Ethiopian mobile formats are accepted without modifying the request", () => {
-  for (const phone of ["+251 911 000 000", "0911000000", "0711000000", "+251711000000"]) {
+  for (const phone of [
+    "+251 911 000 000",
+    "0911000000",
+    "0711000000",
+    "+251711000000",
+  ]) {
     const data = { ...valid, phone };
     const before = structuredClone(data);
     assert.deepEqual(validateRequest(data, clinic.services, "2026-11-13"), {});
@@ -106,10 +150,16 @@ test("Valid Ethiopian mobile formats are accepted without modifying the request"
 });
 
 test("Invalid, past, Sunday, impossible, and unavailable requests are rejected", () => {
-  for (const date of ["2026-11-12", "2026-11-13", "2026-11-15", "2026-02-30", "bad"])
+  for (const date of [
+    "2026-11-12",
+    "2026-11-13",
+    "2026-11-15",
+    "2026-02-30",
+    "bad",
+  ])
     assert.equal(
       validateRequest({ ...valid, date }, clinic.services, "2026-11-13").date,
-      "invalidDate"
+      "invalidDate",
     );
   const errors = validateRequest(
     {
@@ -122,7 +172,7 @@ test("Invalid, past, Sunday, impossible, and unavailable requests are rejected",
       message: "x".repeat(501),
     },
     clinic.services,
-    "2026-11-13"
+    "2026-11-13",
   );
   assert.deepEqual(Object.keys(errors).sort(), [
     "consent",
@@ -139,12 +189,15 @@ test("Date validation follows Addis Ababa time at the UTC day boundary", () => {
 });
 
 test("Demo has no personal-data persistence or request delivery", async () => {
-  const script = await fs.readFile(new URL("../src/app.mjs", import.meta.url), "utf8");
+  const script = await fs.readFile(
+    new URL("../src/app.mjs", import.meta.url),
+    "utf8",
+  );
   assert.doesNotMatch(
     script,
-    /fetch\(|XMLHttpRequest|sendBeacon|sessionStorage|JSON\.stringify\(data/
+    /fetch\(|XMLHttpRequest|sendBeacon|sessionStorage|JSON\.stringify\(data/,
   );
   assert.equal((script.match(/localStorage\.setItem\(/g) || []).length, 1);
-  assert.ok(script.includes('localStorage.setItem("lomi-theme"'));
+  assert.match(script, /localStorage\.setItem\(\s*"lomi-theme"/);
   assert.ok(script.includes("form.reset()"));
 });

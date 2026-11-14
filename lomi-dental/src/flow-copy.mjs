@@ -1,6 +1,7 @@
 export const flowCopy = {
   en: {
     navContact: "Contact",
+    mobileAppointment: "Request a visit",
     viewTreatment: "View treatment",
     homeTreatments: "Explore our treatments",
     homeApproach: "Care that starts with listening",
@@ -18,8 +19,10 @@ export const flowCopy = {
     nextContact: "Plan your visit to Bole",
     nextTeamBody:
       "Meet the dentists, explore their focus areas, and learn about their approach to care.",
-    nextClinicBody: "Explore the clinic and find out what to expect before your first visit.",
-    nextContactBody: "Check our location, opening hours, and directions before you come.",
+    nextClinicBody:
+      "Explore the clinic and find out what to expect before your first visit.",
+    nextContactBody:
+      "Check our location, opening hours, and directions before you come.",
     firstVisitTitle: "What happens at your first visit?",
     firstVisitBody:
       "We begin with a conversation, explain the assessment, and agree on your next steps together.",
@@ -31,7 +34,8 @@ export const flowCopy = {
     directions: "Directions and access",
     requestStep: "Request your preferred visit",
     confirmStep: "Reception confirms the time",
-    assessment: "Your dentist assesses your needs before recommending treatment.",
+    assessment:
+      "Your dentist assesses your needs before recommending treatment.",
     groups: {
       healthy: {
         title: "Keep teeth healthy",
@@ -77,6 +81,7 @@ export const flowCopy = {
   },
   am: {
     navContact: "አድራሻ",
+    mobileAppointment: "ቀጠሮ ይጠይቁ",
     viewTreatment: "ሕክምናውን ይመልከቱ",
     homeTreatments: "ሕክምናዎቻችንን ይመልከቱ",
     homeApproach: "በማዳመጥ የሚጀምር እንክብካቤ",
@@ -107,8 +112,14 @@ export const flowCopy = {
     confirmStep: "መቀበያው ጊዜውን ያረጋግጣል",
     assessment: "ሐኪምዎ ሕክምና ከመምከሩ በፊት ፍላጎትዎን ይመረምራል።",
     groups: {
-      healthy: { title: "የጥርስ ጤናን ይጠብቁ", body: "መደበኛ ምርመራ፣ የባለሙያ ጽዳትና የጥርስና የድድ እንክብካቤ ምክር።" },
-      repair: { title: "ጥርስን ያድሱ ወይም ይተኩ", body: "በምርመራ በመጀመር ለተጎዱ ወይም ለጎደሉ ጥርሶች ያሉ አማራጮችን ይወቁ።" },
+      healthy: {
+        title: "የጥርስ ጤናን ይጠብቁ",
+        body: "መደበኛ ምርመራ፣ የባለሙያ ጽዳትና የጥርስና የድድ እንክብካቤ ምክር።",
+      },
+      repair: {
+        title: "ጥርስን ያድሱ ወይም ይተኩ",
+        body: "በምርመራ በመጀመር ለተጎዱ ወይም ለጎደሉ ጥርሶች ያሉ አማራጮችን ይወቁ።",
+      },
       smile: {
         title: "ለፈገግታዎ ለውጥ አማራጮችን ይወቁ",
         body: "ስለ ጥርስ ማንጣትና ማስተካከል አማራጮች እና ለእርስዎ ተስማሚ መሆናቸው ይወቁ።",
