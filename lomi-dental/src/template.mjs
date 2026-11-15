@@ -46,7 +46,7 @@ export function render(lang, route, assetVersion = "") {
   const textLink = (label, page, selected) =>
     `<a class="text-link" href="${link(page, selected)}">${e(label)} ${arrow}</a>`;
   const photo = (key, alt, classes = "", eager = false) =>
-    `<img src="${e(clinic.images[key])}" alt="${e(p.imageAlt[key] || alt)}" width="1536" height="1024" class="${classes}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+    `<img src="${e(clinic.images[key])}" alt="${e(p.imageAlt[key] || alt)}" width="${key === "catalog" ? 1400 : 1536}" height="${key === "catalog" ? 1050 : 1024}" class="${classes}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
   const intro = (_eyebrow, title, body, h = "h1") =>
     `<div ${h === "h1" ? 'data-hero-copy' : ""} class="max-w-2xl"><${h} class="${h === "h1" ? "page-title" : "heading"}">${e(title)}</${h}>${body ? `<p class="body-copy mt-5 max-w-xl">${e(body)}</p>` : ""}</div>`;
   const title = serviceId ? t.serviceContent[serviceId][1] : t.nav[route];
@@ -102,7 +102,7 @@ export function render(lang, route, assetVersion = "") {
         services: group.services.filter((id) => clinic.services.includes(id)),
       }))
       .filter((group) => group.services.length);
-    main = `${breadcrumbs()}<section class="wrap pb-16 md:pb-20"><div class="page-intro">${intro("", t.nav.services, u.treatmentsText)}</div><figure class="mb-8">${photo("catalog", t.photoNote, "h-56 w-full rounded-xl object-cover md:h-72", true)}</figure><nav class="page-jumps mb-9" aria-label="${e(f.treatmentGroups)}">${groups.map((group) => `<a href="#group-${group.id}">${e(f.groups[group.id].title)}</a>`).join("")}</nav><div class="space-y-12">${groups.map((group) => `<section id="group-${group.id}" class="scroll-mt-28" data-treatment-group="${group.id}"><h2 class="heading">${e(f.groups[group.id].title)}</h2><p class="body-copy mt-3 mb-6 max-w-2xl">${e(f.groups[group.id].body)}</p>${treatmentCards(group.services, "catalog")}</section>`).join("")}</div><div class="mt-10">${unsure()}</div></section>${cta()}`;
+    main = `${breadcrumbs()}<section class="wrap pb-16 md:pb-20"><div class="page-intro">${intro("", t.nav.services, u.treatmentsText)}</div><figure class="mx-auto mb-8 w-full max-w-4xl">${photo("catalog", t.photoNote, "block h-auto w-full rounded-xl", true)}</figure><nav class="page-jumps mb-9" aria-label="${e(f.treatmentGroups)}">${groups.map((group) => `<a href="#group-${group.id}">${e(f.groups[group.id].title)}</a>`).join("")}</nav><div class="space-y-12">${groups.map((group) => `<section id="group-${group.id}" class="scroll-mt-28" data-treatment-group="${group.id}"><h2 class="heading">${e(f.groups[group.id].title)}</h2><p class="body-copy mt-3 mb-6 max-w-2xl">${e(f.groups[group.id].body)}</p>${treatmentCards(group.services, "catalog")}</section>`).join("")}</div><div class="mt-10">${unsure()}</div></section>${cta()}`;
   } else if (serviceId) {
     const service = t.serviceContent[serviceId];
     const group = clinic.serviceGroups.find((item) =>
